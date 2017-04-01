@@ -1,0 +1,104 @@
+<ion-content style="background-image: url('../../assets/images/bckgd.jpg')" padding>
+  <ion-segment [(ngModel)]="page">
+    <ion-segment-button value="Login">
+      Login
+    </ion-segment-button>
+    <ion-segment-button value="Register">
+      Register
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="page">
+    <div *ngSwitchCase="'Login'" padding text-center>
+      <img src="../../assets/images/149003944258585.png" />
+      <ion-segment [(ngModel)]="user">                
+        <ion-segment-button value="Consumer">
+          Consumer
+        </ion-segment-button>
+        <ion-segment-button value="Retailer">
+          Retailer
+        </ion-segment-button>
+      </ion-segment>
+      <div [ngSwitch]="user">
+        <div *ngSwitchCase="'Consumer'" padding>
+          <form [formGroup]="loginForm" (submit)="onSubmit()">
+            <ion-card *ngIf="!phone" style="background: none;box-shadow: none;">
+              <ion-item>
+                <ion-icon name="phone-portrait" item-left></ion-icon>            
+                <ion-input type="tel" formControlName="phone" placeholder="98XXXXXXXX"></ion-input>            
+                <button type="button" ion-button icon-only item-right clear [disabled]="loginForm.controls.phone.invalid" (click)="phone = true">
+                  <ion-icon name="md-send" ></ion-icon>
+                </button>
+              </ion-item>
+              <p text-center style="color: wheat;padding: 2px;">Enter Mobile No</p>
+            </ion-card>
+            <ion-card *ngIf="phone" style="background: none;box-shadow: none;">
+              <ion-item>
+                <ion-icon name="md-key" item-left></ion-icon>            
+                <ion-input type="password" formControlName="key"></ion-input>
+                <button type="submit" ion-button icon-only item-right clear [disabled]="loginForm.controls.key.invalid">
+                  <ion-icon name="md-send" ></ion-icon>
+                </button>
+              </ion-item>
+              <p text-center style="color: wheat;padding: 2px;">Password</p>
+            </ion-card>
+          </form>          
+        </div>
+        <div *ngSwitchCase="'Retailer'" padding>
+          <ion-item>
+            <ion-icon name="person" item-left></ion-icon>
+            <ion-input type="text" placeholder="Username"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="lock" item-left></ion-icon>
+            <ion-input type="password" placeholder="Password"></ion-input>
+          </ion-item>
+          <div>
+            <button ion-button full>Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'Register'">
+      <!--<form>-->
+        <ion-card>
+          <ion-card-header text-center>
+            Register New User
+          </ion-card-header>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>First Name</ion-label>
+              <ion-input type="text" name=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Last Name</ion-label>
+              <ion-input type="text" name=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input type="email" name=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password" name=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Mobile No.</ion-label>
+              <ion-input type="number" name=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Gender</ion-label>
+              <ion-select [(ngModel)]="gender" name="">
+                <ion-option value="male">Male</ion-option>
+                <ion-option value="female">Female</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+      </ion-card>
+      <div>
+        <button ion-button full>Register</button>
+      </div>
+      <!--</form>-->
+    </div>
+  </div>
+</ion-content>
