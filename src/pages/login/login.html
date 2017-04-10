@@ -1,4 +1,4 @@
-<ion-content style="background-image: url('../../assets/images/bckgd.jpg')" padding>
+<ion-content style="background-image: url('assets/images/bckgd.jpg')" padding>
   <ion-segment [(ngModel)]="page">
     <ion-segment-button value="Login">
       Login
@@ -10,7 +10,7 @@
 
   <div [ngSwitch]="page">
     <div *ngSwitchCase="'Login'" padding text-center>
-      <img src="../../assets/images/149003944258585.png" />
+      <img src="assets/images/149003944258585.png" />
       <ion-segment [(ngModel)]="user">                
         <ion-segment-button value="Consumer">
           Consumer
@@ -20,13 +20,13 @@
         </ion-segment-button>
       </ion-segment>
       <div [ngSwitch]="user">
-        <div *ngSwitchCase="'Consumer'" padding>
-          <form [formGroup]="loginForm" (submit)="onSubmit()">
+        <div *ngSwitchCase="'Consumer'">
+          <form [formGroup]="consumerLoginForm" (submit)="consumerSubmit()">
             <ion-card *ngIf="!phone" style="background: none;box-shadow: none;">
               <ion-item>
                 <ion-icon name="phone-portrait" item-left></ion-icon>            
                 <ion-input type="tel" formControlName="phone" placeholder="98XXXXXXXX"></ion-input>            
-                <button type="button" ion-button icon-only item-right clear [disabled]="loginForm.controls.phone.invalid" (click)="phone = true">
+                <button type="button" ion-button icon-only item-right clear [disabled]="consumerLoginForm.controls.phone.invalid" (click)="phone = true">
                   <ion-icon name="md-send" ></ion-icon>
                 </button>
               </ion-item>
@@ -36,7 +36,7 @@
               <ion-item>
                 <ion-icon name="md-key" item-left></ion-icon>            
                 <ion-input type="password" formControlName="key"></ion-input>
-                <button type="submit" ion-button icon-only item-right clear [disabled]="loginForm.controls.key.invalid">
+                <button type="submit" ion-button icon-only item-right clear [disabled]="consumerLoginForm.controls.key.invalid">
                   <ion-icon name="md-send" ></ion-icon>
                 </button>
               </ion-item>
@@ -45,17 +45,19 @@
           </form>          
         </div>
         <div *ngSwitchCase="'Retailer'" padding>
+          <form [formGroup]="retailerLoginForm" (submit)="retailerSubmit()">
           <ion-item>
             <ion-icon name="person" item-left></ion-icon>
-            <ion-input type="text" placeholder="Username"></ion-input>
+            <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
           </ion-item>
           <ion-item>
             <ion-icon name="lock" item-left></ion-icon>
-            <ion-input type="password" placeholder="Password"></ion-input>
+            <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
           </ion-item>
           <div>
-            <button ion-button full>Login</button>
+            <button type="submit" ion-button full [disabled]="retailerLoginForm.invalid">Login</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
